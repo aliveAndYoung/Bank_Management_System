@@ -1,7 +1,8 @@
 #include "account.h"
+#include <iomanip>
 using namespace std;
-Account::Account(string account_name, string user_address, int account_number)
-    : name(account_name), address(user_address), number(account_number) {};
+Account::Account(string account_name, string user_address, int account_number, double balance, bool is_active)
+    : name(account_name), address(user_address), number(account_number), balance(balance), is_active(is_active) {};
 
 Account::~Account() { cout << this->number << "Account destructor called \n"; };
 
@@ -60,6 +61,7 @@ void Account::deposit(double amount)
         return;
     }
     this->balance += amount;
+    cout << "Deposited to account " << this->number << " successfully" << endl;
 }
 
 void Account::withdraw(double amount)
@@ -74,13 +76,28 @@ void Account::withdraw(double amount)
         cout << "Amount must be greater than 0 \n";
         return;
     }
+    if (amount > balance)
+    {
+        cout << "Insufficient balance\n";
+        return;
+    }
     this->balance -= amount;
+    cout << "Withdrawn from account " << this->number << " successfully" << endl;
+}
+char Account::get_type() const
+{
+    return this->is_active ? 'T' : 'F';
 }
 
 void Account::display() const
 {
-    cout << "Account number: " << this->number << endl;
-    cout << "Account name: " << this->name << endl;
-    cout << "Account address: " << this->address << endl;
-    cout << "Account balance: " << this->balance << endl;
+    cout << "\n-------------------------------\n";
+    cout << "      Account Information      \n";
+    cout << "-------------------------------\n";
+    cout << left << setw(15) << "Number:" << number << endl;
+    cout << left << setw(15) << "Name:" << name << endl;
+    cout << left << setw(15) << "Address:" << address << endl;
+    cout << left << setw(15) << "Balance:" << fixed << setprecision(2) << balance << endl;
+    cout << left << setw(15) << "Status:" << (is_active ? "Active" : "Inactive") << endl;
+    cout << "-------------------------------\n";
 }

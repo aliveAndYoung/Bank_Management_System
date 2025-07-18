@@ -7,14 +7,15 @@ using namespace std;
 class Account
 {
 private:
-    double balance = 0;
     int number;
     string name;
     string address;
-    bool is_active = true;
+    double balance;
+    bool is_active;
 
 public:
-    Account(string account_name, string user_address, int account_number);
+    Account(string account_name, string user_address, int account_number, double balance = 0, bool is_active = true);
+    ~Account();
     void deposit(double amount);
     void withdraw(double amount);
     void display() const;
@@ -31,6 +32,7 @@ public:
     double get_balance() const;
 
     void deactivate();
+    char get_type() const;
 };
 
 #endif

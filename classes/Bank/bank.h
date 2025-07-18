@@ -6,18 +6,21 @@
 class Bank
 {
 private:
-    std::vector<Account &> accounts;
+    vector<Account *> accounts;
 
 public:
     Bank();
     ~Bank();
 
-    // Services
+    void deallocateAccounts();
+    void updateVector();
+    void updateFile();
     void addAccount();
-    void viewAccount(int accNo);
-    void depositToAccount(int accNo, double amount);
-    void withdrawFromAccount(int accNo, double amount);
-    void deleteAccount(int accNo);
+    void viewAccount();
+    void depositToAccount();
+    void withdrawFromAccount();
+    void deleteAccount();
     void listAllAccounts();
+    void updateAccount();
 };
 #endif
